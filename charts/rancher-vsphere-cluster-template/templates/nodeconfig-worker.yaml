@@ -1,0 +1,37 @@
+{{- $clustername := .Values.cluster.name }}
+apiVersion: rke-machine-config.cattle.io/v1
+kind: Amazonec2Config
+metadata:
+  name: {{ $clustername }}-controlplane
+  namespace: fleet-default
+instanceType: t3a.medium
+region: eu-central-1
+subnetId: subnet-0984ae232db1d4391
+vpcId: vpc-0c7c6085a97724ca9
+zone: a
+sshUser: ubuntu
+
+
+
+  - name: "control-plane"
+    quantity: 1
+    datacenter: "/Datacenter"
+    datastore: "/Datacenter/datastore/vsanDatastore"
+  # Specify one creationType: vm, template, library, legacy
+    creationType: "library" 
+  # cloneFrom will need to match the corresponding creationType
+  # For example, if you were cloning from a template, you would use:
+  # creationType: "template"
+  # cloneFrom: "/Datacenter/vm/Rocky9.4-minimal"
+    cloneFrom: "Rocky9.4-minimal"
+    contentLibrary: "MyContentLibrary"
+    cloneFrom: "Rocky9.4-minimal"
+    etcd: true
+    controlplane: true
+    worker: true
+    cpuCount: 2
+    diskSize: 20000
+    memorySize: 4096
+    cloudConfig: |
+      #cloud-config
+      echo "Put your cloud config here"

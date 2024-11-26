@@ -1,0 +1,8 @@
+apiVersion: v1
+name: rancher-cluster-custom-template
+description: RKE2 Cluster template for Custom
+version: 0.2.1
+icon: https://blogs.vmware.com/management/files/2022/08/vmw-prod-icon-aria-cmyk_vert-1-576x324.png
+annotations:
+  catalog.cattle.io/type: cluster-template
+  catalog.cattle.io/namespace: fleet-default

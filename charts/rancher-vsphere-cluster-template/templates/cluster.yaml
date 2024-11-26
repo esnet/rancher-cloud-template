@@ -13,6 +13,9 @@ metadata:
   name: {{ $clustername }}
   namespace: fleet-default
 spec:
+  {{- if .Values.cloudCredentialSecretName }}
+  cloudCredentialSecretName: {{ .Values.cloudCredentialSecretName }}
+  {{- end }}
   kubernetesVersion: v1.31.2+rke2r1
   localClusterAuthEndpoint:
     caCerts: ''
