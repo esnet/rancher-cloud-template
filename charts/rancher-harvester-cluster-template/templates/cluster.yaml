@@ -1,0 +1,42 @@
+{{- $clustername := .Values.cluster.name }}
+apiVersion: provisioning.cattle.io/v1
+kind: Cluster
+metadata:
+  {{- if .Values.cluster.labels }}
+  labels:
+{{ toYaml .Values.cluster.labels | indent 4 }}
+  {{- end }}
+  {{- if .Values.cluster.annotations }}
+  annotations:
+{{ toYaml .Values.cluster.annotations | indent 4 }}
+  {{- end }}
+  name: {{ $clustername }}
+  namespace: fleet-default
+spec:
+  kubernetesVersion: v1.31.2+rke2r1
+  localClusterAuthEndpoint:
+    caCerts: ''
+    enabled: false
+    fqdn: ''
+  rkeConfig:
+    chartValues:
+      rke2-cilium:
+        hubble:
+          enabled: true
+          relay:
+            enabled: true
+          ui:
+            enabled: true
+        ipv6:
+          enabled: true
+        k8sServiceHost: 127.0.0.1
+        k8sServicePort: '6443'
+        kubeProxyReplacement: true
+        bgpControlPlane:
+          enabled: true
+    machineGlobalConfig:
+      cluster-cidr: 10.42.0.0/16,fd00:10:42::/56
+      cni: cilium
+      disable-kube-proxy: true
+      etcd-expose-metrics: false
+      service-cidr: 10.96.0.0/16,fd00:10:96::/112

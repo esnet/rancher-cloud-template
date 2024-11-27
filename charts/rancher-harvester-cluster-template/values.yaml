@@ -1,0 +1,10 @@
+# cluster specific values
+cluster:
+  # specify cluster name
+  name: harvester-cluster
+
+  # specify cluster labels
+  labels: {}
+
+  # specify cluster annotations
+  annotations: {}
