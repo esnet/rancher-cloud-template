@@ -21,6 +21,27 @@ spec:
     caCerts: ''
     enabled: false
     fqdn: ''
+  machinePools:
+    - controlPlaneRole: true
+      etcdRole: true
+      workerRole: false
+      quantity: 1
+      name: {{ $clustername }}-controlplane
+      machineConfigRef:
+        kind: VmwarevsphereConfig
+        name: {{ $clustername }}-controlplane
+      paused: false
+      displayName: {{ $clustername }}-controlplane
+    - controlPlaneRole: false
+      etcdRole: false
+      workerRole: true
+      quantity: 1
+      name: {{ $clustername }}-worker
+      machineConfigRef:
+        kind: VmwarevsphereConfig
+        name: {{ $clustername }}-worker
+      paused: false
+      displayName: {{ $clustername }}-worker
   rkeConfig:
     chartValues:
       rke2-cilium:
