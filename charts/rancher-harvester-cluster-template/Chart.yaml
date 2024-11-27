@@ -2,7 +2,7 @@ apiVersion: v1
 name: rancher-cluster-custom-template
 description: RKE2 Cluster template for Custom
 version: 0.2.1
-icon: https://upload.wikimedia.org/wikipedia/commons/4/4e/Logo_suse.png
+icon: https://www.suse.com/c/wp-content/uploads/2021/12/Harvester-Symbol.jpeg
 annotations:
   catalog.cattle.io/type: cluster-template
   catalog.cattle.io/namespace: fleet-default
