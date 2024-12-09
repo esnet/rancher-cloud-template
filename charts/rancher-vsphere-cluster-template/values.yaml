@@ -11,3 +11,33 @@ cluster:
 
 # specify cloud credential secret name, do not need to be provided if using custom driver
 cloudCredentialSecretName: "LBL"
+
+# contentLibrary: {{ $nodepool.contentLibrary }}
+cfgparam:
+  disk.enableUUID: TRUE
+cloneFrom: "/LBNL/vm/Templates/Rancher/kapil-test"
+cpuCount: 8
+creationType: "template"
+#customAttribute: {{ $nodepool.customAttribute }}
+datacenter: "/LBNL"
+datastore: "/LBNL/datastore/vsanDatastore_lbl"
+#datastoreCluster: {{ $nodepool.datastoreCluster }}
+diskSize: 100
+folder: "/LBNL/vm"
+hostsystem: "Any"
+memorySize: 8192
+network: "ds06.198.128.131.1-24"
+pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_RancherDev"
+#sshPort: {{ $nodepool.sshPort | quote }}
+#sshUser: {{ $nodepool.sshUser }}
+#sshUserGroup: {{ $nodepool.sshUserGroup }}
+#tag: {{ $nodepool.tag }}
+vappIpallocationpolicy: "fixedAllocated"
+vappIpprotocol: "IPv4"
+vappProperty: 
+  ipaddress: "ipaddress=ip:ds06.198.128.131.1-24"
+  gateway: "gateway=$${gateway:ds06.198.128.131.1-24}"
+  dns: "dns=$${dns:ds06.198.128.131.1-24}"
+vappTransport: "com.vmware.guestInfo"
+vcenter: "vcenter-west1.es.net"
+vcenterPort: 443

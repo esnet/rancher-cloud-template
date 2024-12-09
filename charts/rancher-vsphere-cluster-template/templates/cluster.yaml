@@ -24,7 +24,7 @@ spec:
   machinePools:
     - controlPlaneRole: true
       etcdRole: true
-      workerRole: false
+      workerRole: true
       quantity: 1
       name: {{ $clustername }}-controlplane
       machineConfigRef:
@@ -32,7 +32,8 @@ spec:
         name: {{ $clustername }}-controlplane
       paused: false
       displayName: {{ $clustername }}-controlplane
-    - controlPlaneRole: false
+{{- /*
+     - controlPlaneRole: false
       etcdRole: false
       workerRole: true
       quantity: 1
@@ -41,7 +42,8 @@ spec:
         kind: VmwarevsphereConfig
         name: {{ $clustername }}-worker
       paused: false
-      displayName: {{ $clustername }}-worker
+      displayName: {{ $clustername }}-worker 
+*/ -}}
   rkeConfig:
     chartValues:
       rke2-cilium:

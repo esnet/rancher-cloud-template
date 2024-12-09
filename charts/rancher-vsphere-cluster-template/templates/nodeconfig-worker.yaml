@@ -1,37 +1,36 @@
-{{- $clustername := .Values.cluster.name }}
+{{- /*
+ {{- $clustername := .Values.cluster.name }}
 apiVersion: rke-machine-config.cattle.io/v1
-kind: Amazonec2Config
+kind: VmwarevsphereConfig
 metadata:
   name: {{ $clustername }}-controlplane
   namespace: fleet-default
-instanceType: t3a.medium
-region: eu-central-1
-subnetId: subnet-0984ae232db1d4391
-vpcId: vpc-0c7c6085a97724ca9
-zone: a
-sshUser: ubuntu
-
-
-
-  - name: "control-plane"
-    quantity: 1
-    datacenter: "/Datacenter"
-    datastore: "/Datacenter/datastore/vsanDatastore"
-  # Specify one creationType: vm, template, library, legacy
-    creationType: "library" 
-  # cloneFrom will need to match the corresponding creationType
-  # For example, if you were cloning from a template, you would use:
-  # creationType: "template"
-  # cloneFrom: "/Datacenter/vm/Rocky9.4-minimal"
-    cloneFrom: "Rocky9.4-minimal"
-    contentLibrary: "MyContentLibrary"
-    cloneFrom: "Rocky9.4-minimal"
-    etcd: true
-    controlplane: true
-    worker: true
-    cpuCount: 2
-    diskSize: 20000
-    memorySize: 4096
-    cloudConfig: |
-      #cloud-config
-      echo "Put your cloud config here"
+cloneFrom: {{ $nodepool.cloneFrom }}
+# cloudConfig: |
+# {{ $nodepool.cloudConfig | indent 2 }}
+#cloudinit: {{ $nodepool.cloudinit }}
+contentLibrary: {{ $nodepool.contentLibrary }}
+cpuCount: {{ $nodepool.cpuCount | quote }}
+creationType: {{ $nodepool.creationType }}
+#customAttribute: {{ $nodepool.customAttribute }}
+datacenter: {{ $nodepool.datacenter }}
+datastore: {{ $nodepool.datastore }}
+datastoreCluster: {{ $nodepool.datastoreCluster }}
+diskSize: {{ $nodepool.diskSize | quote }}
+folder: {{ $nodepool.folder }}
+hostsystem: {{ $nodepool.hostsystem }}
+memorySize: {{ $nodepool.memorySize | quote }}
+network: {{ $nodepool.network }}
+pool: {{ $nodepool.pool }}
+#sshPort: {{ $nodepool.sshPort | quote }}
+#sshUser: {{ $nodepool.sshUser }}
+#sshUserGroup: {{ $nodepool.sshUserGroup }}
+#tag: {{ $nodepool.tag }}
+vappIpallocationpolicy: {{ $nodepool.vappIpallocationpolicy }}
+vappIpprotocol: {{ $nodepool.vappIpprotocol }}
+vappProperty: {{ $nodepool.vappProperty }}
+vappTransport: {{ $nodepool.vappTransport }}
+#vcenter: {{ $nodepool.vcenter }}
+#vcenterPort: {{ $nodepool.vcenterPort | quote }}
+ 
+*/ -}}
