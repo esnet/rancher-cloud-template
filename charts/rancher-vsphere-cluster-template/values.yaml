@@ -123,7 +123,7 @@ nodepools:
   network: "ds06.198.128.131.1-24"
 
   # vSphere resource pool for docker VM
-  pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_RancherDev"
+  pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_rancher"
 
   # If using a non-B2D image you can specify the ssh port
   #sshPort: "22"
