@@ -2,8 +2,6 @@
 apiVersion: provisioning.cattle.io/v1
 kind: Cluster
 metadata:
-  labels: ['test-templates']
-  annotations: ['test-annotation']
   name: {{ $clustername }}
   namespace: fleet-default
 spec:
