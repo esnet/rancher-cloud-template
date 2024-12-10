@@ -1,35 +1,24 @@
 {{- $clustername := .Values.cluster.name }}
-#{{- $nodepool := .Values.nodepool }}
 apiVersion: rke-machine-config.cattle.io/v1
 kind: VmwarevsphereConfig
 metadata:
   name: {{ $clustername }}-controlplane
   namespace: fleet-default
-cfgparam: ["disk.enableUUID: TRUE"] # {{ $nodepool.cfgparam }}
-cloneFrom: "/LBNL/vm/Templates/Rancher/kapil-test" # {{ $nodepool.cloneFrom }}
-# cloudConfig: |
-# {{ $nodepool.cloudConfig | indent 2 }}
-#cloudinit: {{ $nodepool.cloudinit }}
-#contentLibrary: {{ $nodepool.contentLibrary }}
-cpuCount: 4 #{{ $nodepool.cpuCount | quote }}
-creationType: "template" # {{ $nodepool.creationType }}
-#customAttribute: {{ $nodepool.customAttribute }}
-datacenter: "/LBNL" # {{ $nodepool.datacenter }}
-datastore: "/LBNL/datastore/vsanDatastore_lbl" # {{ $nodepool.datastore }}
-#datastoreCluster: {{ $nodepool.datastoreCluster }}
-diskSize: 100 # {{ $nodepool.diskSize | quote }}
-folder: "/LBNL/vm" # {{ $nodepool.folder }}
-hostsystem: "Any" # {{ $nodepool.hostsystem }}
-memorySize: 8192 #{{ $nodepool.memorySize | quote }}
-network: "ds06.198.128.131.1-24" # {{ $nodepool.network }}
-pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_RancherDev" # {{ $nodepool.pool }}
-#sshPort: {{ $nodepool.sshPort | quote }}
-#sshUser: {{ $nodepool.sshUser }}
-#sshUserGroup: {{ $nodepool.sshUserGroup }}
-#tag: {{ $nodepool.tag }}
-vappIpallocationpolicy: "fixedAllocated" # {{ $nodepool.vappIpallocationpolicy }}
-vappIpprotocol: "IPv4" # {{ $nodepool.vappIpprotocol }}
+cfgparam: ["disk.enableUUID: TRUE"]
+cloneFrom: "/LBNL/vm/Templates/Rancher/kapil-test"
+cpuCount: 4
+creationType: "template"
+datacenter: "/LBNL"
+datastore: "/LBNL/datastore/vsanDatastore_lbl"
+diskSize: 100
+folder: "/LBNL/vm"
+hostsystem: "Any"
+memorySize: 8192
+network: "ds06.198.128.131.1-24"
+pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_RancherDev"
+vappIpallocationpolicy: "fixedAllocated"
+vappIpprotocol: "IPv4"
 vappProperty: ["ipaddress=ip:ds06.198.128.131.1-24", "gateway=$${gateway:ds06.198.128.131.1-24}", "dns=$${dns:ds06.198.128.131.1-24}"] # {{ $nodepool.vappProperty }}
-vappTransport: "com.vmware.guestInfo" # {{ $nodepool.vappTransport }}
-vcenter: "vcenter-west1.es.net" # {{ $nodepool.vcenter }}
-vcenterPort: 443 # {{ $nodepool.vcenterPort | quote }}
+vappTransport: "com.vmware.guestInfo"
+vcenter: "vcenter-west1.es.net"
+vcenterPort: 443
