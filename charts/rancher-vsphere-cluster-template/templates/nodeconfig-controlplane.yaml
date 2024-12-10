@@ -1,35 +1,35 @@
 {{- $clustername := .Values.cluster.name }}
-{{- $nodepool := .Values.nodepool }}
+#{{- $nodepool := .Values.nodepool }}
 apiVersion: rke-machine-config.cattle.io/v1
 kind: VmwarevsphereConfig
 metadata:
   name: {{ $clustername }}-controlplane
   namespace: fleet-default
 cfgparam: {{ $nodepool.cfgparam }}
-cloneFrom: {{ $nodepool.cloneFrom }}
+cloneFrom: "/LBNL/vm/Templates/Rancher/kapil-test" # {{ $nodepool.cloneFrom }}
 # cloudConfig: |
 # {{ $nodepool.cloudConfig | indent 2 }}
 #cloudinit: {{ $nodepool.cloudinit }}
 #contentLibrary: {{ $nodepool.contentLibrary }}
-cpuCount: {{ $nodepool.cpuCount | quote }}
-creationType: {{ $nodepool.creationType }}
+cpuCount: 4 #{{ $nodepool.cpuCount | quote }}
+creationType: "template" # {{ $nodepool.creationType }}
 #customAttribute: {{ $nodepool.customAttribute }}
-datacenter: {{ $nodepool.datacenter }}
-datastore: {{ $nodepool.datastore }}
+datacenter: "/LBNL" # {{ $nodepool.datacenter }}
+datastore: "/LBNL/datastore/vsanDatastore_lbl" # {{ $nodepool.datastore }}
 #datastoreCluster: {{ $nodepool.datastoreCluster }}
-diskSize: {{ $nodepool.diskSize | quote }}
-folder: {{ $nodepool.folder }}
-hostsystem: {{ $nodepool.hostsystem }}
-memorySize: {{ $nodepool.memorySize | quote }}
-network: {{ $nodepool.network }}
-pool: {{ $nodepool.pool }}
+diskSize: 100 # {{ $nodepool.diskSize | quote }}
+folder: "/LBNL/vm" # {{ $nodepool.folder }}
+hostsystem: "Any" # {{ $nodepool.hostsystem }}
+memorySize: 8192 #{{ $nodepool.memorySize | quote }}
+network: "ds06.198.128.131.1-24" # {{ $nodepool.network }}
+pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_RancherDev" # {{ $nodepool.pool }}
 #sshPort: {{ $nodepool.sshPort | quote }}
 #sshUser: {{ $nodepool.sshUser }}
 #sshUserGroup: {{ $nodepool.sshUserGroup }}
 #tag: {{ $nodepool.tag }}
-vappIpallocationpolicy: {{ $nodepool.vappIpallocationpolicy }}
-vappIpprotocol: {{ $nodepool.vappIpprotocol }}
-vappProperty: {{ $nodepool.vappProperty }}
-vappTransport: {{ $nodepool.vappTransport }}
+vappIpallocationpolicy: "fixedAllocated" # {{ $nodepool.vappIpallocationpolicy }}
+vappIpprotocol: "IPv4" # {{ $nodepool.vappIpprotocol }}
+vappProperty: ["ipaddress=ip:ds06.198.128.131.1-24", "gateway=$${gateway:ds06.198.128.131.1-24}", "dns=$${dns:ds06.198.128.131.1-24}"] # {{ $nodepool.vappProperty }}
+vappTransport: "com.vmware.guestInfo" # {{ $nodepool.vappTransport }}
 vcenter: {{ $nodepool.vcenter }}
 vcenterPort: {{ $nodepool.vcenterPort | quote }}

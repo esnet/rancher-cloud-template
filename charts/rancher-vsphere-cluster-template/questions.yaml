@@ -10,8 +10,3 @@ questions:
   label: "CloudCredential Name"
   type: cloudcredential
   group: "General"
-- variable: nodepool
-  description: "Node pool specs"
-  label: "Nodepool specs"
-  type: string
-  group: "General"
