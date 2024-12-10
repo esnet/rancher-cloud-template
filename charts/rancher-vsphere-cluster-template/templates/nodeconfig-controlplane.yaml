@@ -14,7 +14,7 @@ diskSize: '100'
 folder: "/LBNL/vm"
 hostsystem: "Any"
 memorySize: '8192'
-network: "ds06.198.128.131.1-24"
+network: ["ds06.198.128.131.1-24"]
 pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_RancherDev"
 vappIpallocationpolicy: "fixedAllocated"
 vappIpprotocol: "IPv4"
