@@ -2,18 +2,13 @@
 apiVersion: provisioning.cattle.io/v1
 kind: Cluster
 metadata:
-  labels: "test-templates"
-  annotations: "test-annotation"
+  labels: 'test-templates'
+  annotations: 'test-annotation'
   name: {{ $clustername }}
   namespace: fleet-default
 spec:
-  cloudCredentialSecretName: {{ .Values.cloudCredentialSecretName }}
-  kubernetesVersion: v1.31.2+rke2r1
-  {{- /* localClusterAuthEndpoint:
-    caCerts: ''
-    enabled: false
-    fqdn: ''
-  */ -}}
+  cloudCredentialSecretName: 'LBL'
+  kubernetesVersion: 'v1.31.2+rke2r1'
   machinePools:
     - controlPlaneRole: true
       etcdRole: true
@@ -25,18 +20,6 @@ spec:
         name: {{ $clustername }}-controlplane
       paused: false
       displayName: {{ $clustername }}-controlplane
-{{- /*
-     - controlPlaneRole: false
-      etcdRole: false
-      workerRole: true
-      quantity: 1
-      name: {{ $clustername }}-worker
-      machineConfigRef:
-        kind: VmwarevsphereConfig
-        name: {{ $clustername }}-worker
-      paused: false
-      displayName: {{ $clustername }}-worker 
-*/ -}}
   rkeConfig:
     chartValues:
       rke2-cilium:

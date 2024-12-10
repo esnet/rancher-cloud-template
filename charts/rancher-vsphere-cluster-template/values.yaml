@@ -10,7 +10,7 @@ cluster:
   annotations: {}
 
 # specify cloud credential secret name, do not need to be provided if using custom driver
-cloudCredentialSecretName: "LBL"
+cloudCredentialSecretName: LBL
 
 # nodepool:
 # # contentLibrary: {{ $nodepool.contentLibrary }}
