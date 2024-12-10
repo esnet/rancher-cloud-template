@@ -12,6 +12,12 @@ cluster:
 # specify cloud credential secret name, do not need to be provided if using custom driver
 cloudCredentialSecretName: LBL
 
+nodepool:
+- etcd: true
+  controlplane: true
+  worker: true
+  quantity: 1
+  name: control-plane-pool
 # nodepool:
 # # contentLibrary: {{ $nodepool.contentLibrary }}
 #   cfgparam:
