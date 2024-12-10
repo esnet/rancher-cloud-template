@@ -5,7 +5,7 @@ kind: VmwarevsphereConfig
 metadata:
   name: {{ $clustername }}-controlplane
   namespace: fleet-default
-cfgparam: {{ $nodepool.cfgparam }}
+cfgparam: ["disk.enableUUID: TRUE"] # {{ $nodepool.cfgparam }}
 cloneFrom: "/LBNL/vm/Templates/Rancher/kapil-test" # {{ $nodepool.cloneFrom }}
 # cloudConfig: |
 # {{ $nodepool.cloudConfig | indent 2 }}
