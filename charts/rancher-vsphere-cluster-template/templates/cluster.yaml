@@ -17,12 +17,10 @@ spec:
   cloudCredentialSecretName: {{ .Values.cloudCredentialSecretName }}
   {{- end }}
   kubernetesVersion: v1.31.2+rke2r1
-{{- /*
   localClusterAuthEndpoint:
     caCerts: ''
     enabled: false
     fqdn: ''
-    */ }}
   machinePools:
     - controlPlaneRole: true
       etcdRole: true
