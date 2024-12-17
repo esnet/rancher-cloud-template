@@ -1,6 +1,6 @@
 cloudprovider: vsphere
 
-cloudCredentialSecretName: LBL
+cloudCredentialSecretName: 
 
 rancher:
   cattle:
