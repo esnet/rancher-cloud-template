@@ -1,0 +1,204 @@
+cloudprovider: vsphere # required
+
+cloudCredentialSecretName: LBL # required
+
+# rancher manager url
+rancher:
+  cattle:
+    url: rancher-staging-west.es.net # required (example: rancher.example.com)
+
+# vcenter url
+vcenter:
+  host: vcenter-west1.es.net # (example: vmware.local)
+
+# cluster values
+cluster:
+  name: rke2-cluster-vsphere
+
+nodepools:
+  - name: control-plane-nodes
+    quantity: 1
+    etcd: true
+    controlplane: true
+    worker: false
+    # labels:
+      # key: value
+    # taints:
+      # effect: value
+      # key: value
+      # value: value
+    paused: false
+    # drainBeforeDelete: true
+    # drainBeforeDeleteTimeout: 30s
+    # unhealthyNodeTimeout: 60s
+    # machineDeploymentLabels:
+      # key: value
+    # machineDeploymentAnnotations:
+      # key: value
+    # rollingUpdate:
+      # maxUnavailable: 1
+      # maxSurge: 1
+    datacenter: '/LBNL' # required (example: /Datacenter)
+    datastore: '/LBNL/datastore/vsanDatastore_lbl' # required (example: /Datacenter/datastore/vsanDatastore)
+    creationType: 'template' # required (example: vm, template, library, legacy)
+    cloneFrom: '/LBNL/vm/Templates/Rancher/kapil-test' # requried - cloneFrom will need to match the corresponding creationType
+    contentLibrary: # required
+    cpuCount: '8'
+    memorySize: '8192'
+    diskSize: '10000'
+    # cloudConfig: |
+      #cloud-config
+
+# cluster specific values
+cluster:
+  # specify cluster name
+  name: vsphere-cluster
+
+  # specify cluster labels
+  labels: {}
+
+  # specify cluster annotations
+  annotations: {}
+
+# specify cloud credential secret name, do not need to be provided if using custom driver
+cloudCredentialSecretName: LBL
+
+# Specify nodepool options. Can add multiple node groups, specify etcd, controlplane and worker roles.
+nodepools:
+- etcd: true
+  controlplane: true
+  worker: true
+
+  # specify node labels
+  labels: {}
+
+  # specify node taints
+  taints: {}
+
+  # specify nodepool size
+  quantity: 1
+
+  # Pause node pool
+  paused: false
+
+  # specify displayName
+  # displayName: ""
+
+  # specify rolling update mechanism
+  # rollingUpdate:
+  #   The maximum number of machines that can be unavailable during the update.
+  #   Value can be an absolute number (ex: 5) or a percentage of desired
+  #   machines (ex: 10%).
+  #   Absolute number is calculated from percentage by rounding down.
+  #   This can not be 0 if MaxSurge is 0.
+  #   Defaults to 0.
+  #   Example: when this is set to 30%, the old MachineSet can be scaled
+  #   down to 70% of desired machines immediately when the rolling update
+  #   starts. Once new machines are ready, old MachineSet can be scaled
+  #   down further, followed by scaling up the new MachineSet, ensuring
+  #   that the total number of machines available at all times
+  #   during the update is at least 70% of desired machines.
+  #   maxUnavailable: "5"
+  #   The maximum number of machines that can be scheduled above the
+  #   desired number of machines.
+  #   Value can be an absolute number (ex: 5) or a percentage of
+  #   desired machines (ex: 10%).
+  #   This can not be 0 if MaxUnavailable is 0.
+  #   Absolute number is calculated from percentage by rounding up.
+  #   Defaults to 1.
+  #   Example: when this is set to 30%, the new MachineSet can be scaled
+  #   up immediately when the rolling update starts, such that the total
+  #   number of old and new machines do not exceed 130% of desired
+  #   machines. Once old machines have been killed, new MachineSet can
+  #   be scaled up further, ensuring that total number of machines running
+  #   at any time during the update is at most 130% of desired machines.
+  #   maxSurge: "1"
+
+  # specify machineDeployment Labels
+  # machineDeploymentLabels: {}
+
+  # specify machineDeployment annotations
+  # machineDeploymentAnnotations: {}
+
+  # specify nodepool name
+  name: vsphere-nodepool-1
+
+  # vSphere vm configuration parameters (used for guestinfo)
+  cfgparam: ["disk.enableUUID: TRUE"]
+
+  # If you choose creation type clone a name of what you want to clone is required
+  cloneFrom: "/LBNL/vm/Templates/Rancher/kapil-test"
+
+  # Contents of cloud-config yaml file to put into the ISO user-data; Format should be:
+  # cloudConfig: |
+  #   #cloud-config
+  #   <custom cloud-config>
+
+  # vSphere cloud-init filepath or url to add to guestinfo, filepath will be read and base64 encoded before adding
+  # cloudinit: ""
+
+  # If you choose to clone from a content library template specify the name of the library
+  # contentLibrary: ""
+
+  # vSphere CPU number for docker VM
+  cpuCount: "8"
+
+  # 'Creation type when creating a new virtual machine. Supported values: vm, template, library, legacy'
+  creationType: "template"
+
+  # vSphere custom attribute, format key/value e.g. '200=mycustom value'
+  # customAttribute: ["200=mycustom value"]
+
+  # vSphere datacenter for virtual machine
+  datacenter: "/LBNL"
+
+  # vSphere datastore for virtual machine
+  datastore: "/LBNL/datastore/vsanDatastore_lbl"
+
+  # vSphere datastore cluster for virtual machine
+  # datastoreCluster: ""
+
+  # vSphere size of disk for docker VM (in MB)
+  diskSize: "10000"
+
+  # vSphere folder for the docker VM. This folder must already exist in the datacenter
+  folder: "/LBNL/vm"
+
+  # vSphere compute resource where the docker VM will be instantiated. This can be omitted if using a cluster with DRS
+  # hostsystem: "Any"
+
+  # vSphere size of memory for docker VM (in MB)
+  memorySize: "8192"
+
+  # vSphere network where the virtual machine will be attached
+  network: "ds06.198.128.131.1-24"
+
+  # vSphere resource pool for docker VM
+  pool: "/LBNL/host/lbnl-clstr4/Resources/RPn_rancher"
+
+  # If using a non-B2D image you can specify the ssh port
+  #sshPort: "22"
+
+  # If using a non-B2D image the uploaded keys will need chown'ed, defaults to staff e.g. docker:staff
+  #sshUserGroup: staff
+
+  # vSphere tag id e.g. urn:xxx
+  # tag: ["urn:xxx"]
+
+  # 'vSphere vApp IP allocation policy. Supported values are: dhcp, fixed, transient and fixedAllocated'
+  vappIpallocationpolicy: "fixedAllocated"
+
+  # 'vSphere vApp IP protocol for this deployment. Supported values are: IPv4 and IPv6'
+  vappIpprotocol: "IPv4"
+
+  # vSphere vApp properties
+  vappProperty: ["ipaddress=ip:ds06.198.128.131.1-24", "gateway=$${gateway:ds06.198.128.131.1-24}", "dns=$${dns:ds06.198.128.131.1-24}"]
+
+  # 'vSphere OVF environment transports to use for properties. Supported values are: iso and com.vmware.guestInfo'
+  vappTransport: "com.vmware.guestInfo"
+
+  # vSphere IP/hostname for vCenter
+  vcenter: "vcenter-west1.es.net"
+
+  # vSphere Port for vCenter
+  vcenterPort: 443
