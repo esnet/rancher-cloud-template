@@ -28,3 +28,34 @@ cluster:
       use_service_account_credentials: false
       protect_kernel_defaults: false
       cloud_provider_name: 'vsphere'
+
+nodepools:
+  - name: control-plane-nodes
+    quantity: 1
+    etcd: true
+    controlplane: true
+    worker: false
+    paused: false
+    datacenter: '/LBNL'
+    datastore: '/LBNL/datastore/vsanDatastore_lbl'
+    creationType: 'template'
+    cloneFrom: '/LBNL/vm/Templates/Rancher/kapil-test'
+    cpuCount: 8
+    memorySize: 8192
+    diskSize: 10000
+    pool: '/LBNL/host/lbnl-clstr4/Resources/RPn_rancher'
+
+  - name: worker-nodes
+    quantity: 1
+    etcd: false
+    controlplane: false
+    worker: true
+    paused: false
+    datacenter: '/LBNL'
+    datastore: '/LBNL/datastore/vsanDatastore_lbl'
+    creationType: 'template'
+    cloneFrom: '/LBNL/vm/Templates/Rancher/kapil-test'
+    cpuCount: 8
+    memorySize: 8192
+    diskSize: 10000
+    pool: '/LBNL/host/lbnl-clstr4/Resources/RPn_rancher'
