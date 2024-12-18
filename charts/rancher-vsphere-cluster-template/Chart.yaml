@@ -1,8 +1,8 @@
 apiVersion: v2
 name: rancher-cluster-vsphere-template
 description: RKE2 Cluster template for Custom
-version: 0.6.1
-appVersion: 0.6.1
+version: 0.5.3
+appVersion: 0.5.3
 icon: https://blogs.vmware.com/management/files/2022/08/vmw-prod-icon-aria-cmyk_vert-1-576x324.png
 annotations:
   catalog.cattle.io/type: cluster-template
