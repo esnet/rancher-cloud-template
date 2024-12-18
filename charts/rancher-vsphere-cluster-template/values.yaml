@@ -1,6 +1,6 @@
 cloudprovider: vsphere
 
-cloudCredentialSecretName: 
+cloudCredentialSecretName: LBL
 
 rancher:
   cattle:
@@ -36,6 +36,13 @@ nodepools:
     controlplane: true
     worker: false
     paused: false
+    datacenter: '/LBNL'
+    datastore: '/LBNL/datastore/vsanDatastore_lbl'
+    creationType: 'template'
+    cloneFrom: '/LBNL/vm/Templates/Rancher/kapil-test'
+    cpuCount: 8
+    memorySize: 8192
+    diskSize: 10000
 
   - name: worker-nodes
     quantity: 1
@@ -43,3 +50,10 @@ nodepools:
     controlplane: false
     worker: true
     paused: false
+    datacenter: '/LBNL'
+    datastore: '/LBNL/datastore/vsanDatastore_lbl'
+    creationType: 'template'
+    cloneFrom: '/LBNL/vm/Templates/Rancher/kapil-test'
+    cpuCount: 8
+    memorySize: 8192
+    diskSize: 10000
