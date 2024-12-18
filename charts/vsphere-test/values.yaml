@@ -44,6 +44,10 @@ nodepools:
     memorySize: 8192
     diskSize: 10000
     pool: '/LBNL/host/lbnl-clstr4/Resources/RPn_rancher'
+    vappIpallocationpolicy: "fixedAllocated"
+    vappIpprotocol: "IPv4"
+    vappProperty: ["ipaddress=ip:ds06.198.128.131.1-24", "gateway=$${gateway:ds06.198.128.131.1-24}", "dns=$${dns:ds06.198.128.131.1-24}"]
+    vappTransport: "com.vmware.guestInfo"
 
   - name: worker-nodes
     quantity: 1
@@ -59,3 +63,7 @@ nodepools:
     memorySize: 8192
     diskSize: 10000
     pool: '/LBNL/host/lbnl-clstr4/Resources/RPn_rancher'
+    vappIpallocationpolicy: "fixedAllocated"
+    vappIpprotocol: "IPv4"
+    vappProperty: ["ipaddress=ip:ds06.198.128.131.1-24", "gateway=$${gateway:ds06.198.128.131.1-24}", "dns=$${dns:ds06.198.128.131.1-24}"]
+    vappTransport: "com.vmware.guestInfo"
