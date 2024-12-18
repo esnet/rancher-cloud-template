@@ -31,7 +31,7 @@ cluster:
 
 nodepools:
   - name: control-plane-nodes
-    quantity: 1
+    quantity: 3
     etcd: true
     controlplane: true
     worker: false
@@ -49,7 +49,7 @@ nodepools:
     vappTransport: "com.vmware.guestInfo"
 
   - name: worker-nodes
-    quantity: 1
+    quantity: 3
     etcd: false
     controlplane: false
     worker: true
